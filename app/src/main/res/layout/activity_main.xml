@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="100dp"
+        android:onClick="gorselSec"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gorselsec" />
+
+    <TextView
+        android:id="@+id/pixelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="pixel sayısı :"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
+    <Button
+        android:id="@+id/grayScaleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_weight="0"
+        android:onClick="makeGray"
+        android:text="Gray Scale"
+        app:layout_constraintEnd_toEndOf="@+id/redAndGray"
+        app:layout_constraintStart_toStartOf="@+id/redAndGray"
+        app:layout_constraintTop_toBottomOf="@+id/redAndGray" />
+
+
+    <Button
+        android:id="@+id/histogramButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="openHistogramActivity"
+        android:text="Make Histograms"
+        app:layout_constraintEnd_toEndOf="@+id/originalButton"
+        app:layout_constraintStart_toStartOf="@+id/originalButton"
+        app:layout_constraintTop_toTopOf="@+id/downloadButton" />
+
+    <Button
+        android:id="@+id/originalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:onClick="returrnOrginal"
+        android:text="original"
+        app:layout_constraintEnd_toEndOf="@+id/extract_red_button"
+        app:layout_constraintStart_toStartOf="@+id/extract_red_button"
+        app:layout_constraintTop_toTopOf="@+id/grayScaleButton" />
+
+    <Button
+        android:id="@+id/downloadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Download"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.849"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grayScaleButton" />
+
+    <Button
+        android:id="@+id/extract_red_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="Extract red"
+        app:layout_constraintEnd_toStartOf="@+id/redAndGray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/redAndGray" />
+
+    <Button
+        android:id="@+id/redAndGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="15dp"
+        android:layout_weight="0"
+        android:text="Extract red and grayscale"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pixelText"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
