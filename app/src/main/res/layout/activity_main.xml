@@ -50,6 +50,7 @@
         android:onClick="openHistogramActivity"
         android:text="Make Histograms"
         app:layout_constraintEnd_toEndOf="@+id/originalButton"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/originalButton"
         app:layout_constraintTop_toTopOf="@+id/downloadButton" />
 
@@ -71,15 +72,17 @@
         android:layout_marginBottom="16dp"
         android:text="Download"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/grayScaleButton"
         app:layout_constraintHorizontal_bias="0.849"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/grayScaleButton"
         app:layout_constraintTop_toBottomOf="@+id/grayScaleButton" />
 
     <Button
         android:id="@+id/extract_red_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_weight="0"
         android:text="Extract red"
         app:layout_constraintEnd_toStartOf="@+id/redAndGray"
@@ -91,11 +94,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="5dp"
         android:layout_weight="0"
         android:text="Extract red and grayscale"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pixelText"/>
+        app:layout_constraintTop_toBottomOf="@+id/pixelText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
