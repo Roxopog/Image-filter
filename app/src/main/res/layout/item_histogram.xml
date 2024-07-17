@@ -4,13 +4,41 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    android:background="@drawable/rounded_frame"> <!-- Apply the rounded_frame drawable here -->
+    android:background="@drawable/rounded_frame">
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/histogramGraph"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_margin="3dp"
-        android:padding="8dp" />
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Histogram"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/ratioTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="ratio"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/ratioData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
 </LinearLayout>

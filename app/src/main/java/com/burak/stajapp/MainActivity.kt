@@ -119,10 +119,10 @@ class MainActivity : AppCompatActivity() {
                         binding.imageView.setImageBitmap(secilenBitmap)
 
                         // Yeniden boyutlandırılmış görselin boyutlarını al ve başka bir TextView'e yazdır (pixelText)
-                        val resizedWidth = kucukBitmap.width
+                        /*val resizedWidth = kucukBitmap.width
                         val resizedHeight = kucukBitmap.height
-                        val resizedPixelCount = resizedHeight * resizedWidth
-                        binding.pixelText.text = "  Pixel boyutları Orijinal: Width: $resizedWidth, Height: $resizedHeight , thumbnail pixel count: $resizedPixelCount"
+                        val resizedPixelCount = resizedHeight * resizedWidth*/
+                        binding.pixelText.text = "  Pixel boyutları Orijinal: Width: $originalWidth, Height: $originalHeight , orijinal pixel count: $originalPixelCount"
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

@@ -15,41 +15,45 @@ class HistogramActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_histogram)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
         // Dosya yolunu Intent'ten al
         val imagePath = intent.getStringExtra("imagePath")
         val histogramBitmap = BitmapFactory.decodeFile(imagePath)
         histogramBitmap?.let {
-            // Histogram arrayleri
-            val histogramData = calculateHistogram(it) // 256
-            val histogramData2 = arrayTopla(histogramData) // 128
-            val histogramData3 = arrayTopla(histogramData2) // 64
-            val histogramData4 = arrayTopla(histogramData3) // 32
-            val histogramData5 = arrayTopla(histogramData4) // 16
-            val histogramData6 = arrayTopla(histogramData5) // 8
-            val histogramData7 = arrayTopla(histogramData6) // 4
-            val histogramData8 = arrayTopla(histogramData7) // 2
+            // Histogram arraylerini oluştur
+            val histogramData = calculateHistogram(it) //256
+            val histogramData2 = arrayTopla(histogramData) //128
+            val histogramData3 = arrayTopla(histogramData2) //64
+            val histogramData4 = arrayTopla(histogramData3) //32
+            val histogramData5 = arrayTopla(histogramData4) //16
+            val histogramData6 = arrayTopla(histogramData5) //8
+            val histogramData7 = arrayTopla(histogramData6) //4
+            val histogramData8 = arrayTopla(histogramData7) //2
+            val histogramData9 = arrayTopla(histogramData8) //1
 
-            // Tüm histogram verilerini bir liste içinde topla
             val histogramDataList = listOf(
-                histogramData, histogramData2, histogramData3,
-                histogramData4, histogramData5, histogramData6,
-                histogramData7, histogramData8
+                histogramData,
+                histogramData2,
+                histogramData3,
+                histogramData4,
+                histogramData5,
+                histogramData6,
+                histogramData7,
+                histogramData8,
+                histogramData9
             )
 
-            // RecyclerView için Adapter'ı ve veri setini ayarla
-            val adapter = HistogramAdapter(histogramDataList)
-            recyclerView.adapter = adapter
+            // RecyclerView ve Adapter ayarları
+            val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.adapter = HistogramAdapter(histogramDataList, histogramData9)
         }
     }
 
     fun arrayTopla(array: IntArray): IntArray {
-        // Yeni array için gerekli boyutta bir IntArray oluşturuyoruz
+        // Yeni array için gerekli boyutta bir IntArray oluştur
         val yeniArray = IntArray(array.size / 2)
 
-        // Array'in elemanlarını ikişerli gruplar halinde toplayıp yeni array'e atıyoruz
+        // Array'in elemanlarını ikişerli gruplar halinde toplayıp yeni array'e ata
         for (i in array.indices step 2) {
             val toplam = array[i] + array[i + 1]
             yeniArray[i / 2] = toplam
