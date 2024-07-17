@@ -5,9 +5,8 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.jjoe64.graphview.GraphView
-import com.jjoe64.graphview.series.BarGraphSeries
-import com.jjoe64.graphview.series.DataPoint
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import java.io.File
 
 class HistogramActivity : AppCompatActivity() {
@@ -16,14 +15,47 @@ class HistogramActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_histogram)
 
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
         // Dosya yolunu Intent'ten al
         val imagePath = intent.getStringExtra("imagePath")
         val histogramBitmap = BitmapFactory.decodeFile(imagePath)
         histogramBitmap?.let {
-            val histogramData = calculateHistogram(it)
-            displayHistogram(histogramData)
-            logHistogramData(histogramData)
+            // Histogram arrayleri
+            val histogramData = calculateHistogram(it) // 256
+            val histogramData2 = arrayTopla(histogramData) // 128
+            val histogramData3 = arrayTopla(histogramData2) // 64
+            val histogramData4 = arrayTopla(histogramData3) // 32
+            val histogramData5 = arrayTopla(histogramData4) // 16
+            val histogramData6 = arrayTopla(histogramData5) // 8
+            val histogramData7 = arrayTopla(histogramData6) // 4
+            val histogramData8 = arrayTopla(histogramData7) // 2
+
+            // Tüm histogram verilerini bir liste içinde topla
+            val histogramDataList = listOf(
+                histogramData, histogramData2, histogramData3,
+                histogramData4, histogramData5, histogramData6,
+                histogramData7, histogramData8
+            )
+
+            // RecyclerView için Adapter'ı ve veri setini ayarla
+            val adapter = HistogramAdapter(histogramDataList)
+            recyclerView.adapter = adapter
         }
+    }
+
+    fun arrayTopla(array: IntArray): IntArray {
+        // Yeni array için gerekli boyutta bir IntArray oluşturuyoruz
+        val yeniArray = IntArray(array.size / 2)
+
+        // Array'in elemanlarını ikişerli gruplar halinde toplayıp yeni array'e atıyoruz
+        for (i in array.indices step 2) {
+            val toplam = array[i] + array[i + 1]
+            yeniArray[i / 2] = toplam
+        }
+
+        return yeniArray
     }
 
     private fun calculateHistogram(bitmap: Bitmap): IntArray {
@@ -42,42 +74,5 @@ class HistogramActivity : AppCompatActivity() {
         }
 
         return histogram
-    }
-
-    private fun displayHistogram(histogramData: IntArray) {
-        val graph = findViewById<GraphView>(R.id.histogramGraph)
-        val series = BarGraphSeries<DataPoint>()
-
-        for (i in histogramData.indices) {
-            series.appendData(DataPoint(i.toDouble(), histogramData[i].toDouble()), true, histogramData.size)
-        }
-
-        graph.addSeries(series)
-
-        // Grafiği özelleştir
-        series.spacing = 1
-        series.color = Color.BLUE
-
-        // Grafiğin görünümünü düzenleyin
-        graph.viewport.isXAxisBoundsManual = true
-        graph.viewport.setMinX(0.0)
-        graph.viewport.setMaxX(255.0)
-        graph.viewport.isYAxisBoundsManual = true
-        graph.viewport.setMinY(0.0)
-        graph.viewport.setMaxY(histogramData.maxOrNull()?.toDouble() ?: 1.0)
-
-        graph.viewport.isScalable = true
-        graph.viewport.isScrollable = true
-        graph.viewport.setScalableY(true)
-        graph.viewport.setScrollableY(true)
-
-        graph.gridLabelRenderer.verticalAxisTitle = "Frequency"
-        graph.gridLabelRenderer.horizontalAxisTitle = "Gray Value"
-    }
-
-    private fun logHistogramData(histogramData: IntArray) {
-        for (i in histogramData.indices) {
-            println("$i = ${histogramData[i]}")
-        }
     }
 }
